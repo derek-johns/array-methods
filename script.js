@@ -1,3 +1,4 @@
+// DOM elements
 const main = document.getElementById("main");
 const addUserBtn = document.getElementById("add-user");
 const doubleBtn = document.getElementById("double");
@@ -24,6 +25,27 @@ async function getRandomUser() {
   };
 
   addData(newUser);
+}
+
+// Filter only millionaires
+function showOnlyMillionaires() {
+  data = data.filter((user) => user.money > 1000000);
+  updateDOM();
+}
+
+// Sort by wealth
+function sortByWealth() {
+  data.sort((a, b) => b.money - a.money);
+  updateDOM();
+}
+
+// Double every person's money
+function doubleMoney() {
+  data = data.map((user) => {
+    return { ...user, money: user.money * 2 };
+  });
+
+  updateDOM();
 }
 
 // Add new obj to data arr
@@ -54,3 +76,6 @@ function formatMoney(number) {
 
 // Event listeners
 addUserBtn.addEventListener("click", getRandomUser);
+doubleBtn.addEventListener("click", doubleMoney);
+sortBtn.addEventListener("click", sortByWealth);
+showMillionaires.addEventListener("click", showOnlyMillionaires);
